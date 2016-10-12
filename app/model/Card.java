@@ -7,12 +7,12 @@ package model;
 public class Card {
 
     private long id;
-    private String listName;
+    private String cardName;
     private String description;
 
-    public Card(long id, String listName, String description) {
+    public Card(long id, String cardName, String description) {
         this.id = id;
-        this.listName = listName;
+        this.cardName = cardName;
         this.description = description;
     }
 
@@ -32,11 +32,11 @@ public class Card {
         this.description = description;
     }
 
-    public String getListName() {
-        return listName;
+    public String getCardName() {
+        return cardName;
     }
 
-    public void setListName(String listName) {
-        this.listName = listName;
+    public void setCardName(String cardName) {
+        this.cardName = cardName;
     }
 }
