@@ -1,8 +1,5 @@
 package controllers.data;
 
-import javax.persistence.*;
-import play.db.ebean.*;
-import com.avaje.ebean.*;
 
 import com.avaje.ebean.Model;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -13,10 +10,6 @@ import play.mvc.*;
 import java.util.List;
 
 import static play.libs.Json.toJson;
-import static play.mvc.Controller.request;
-import static play.mvc.Results.badRequest;
-import static play.mvc.Results.notFound;
-import static play.mvc.Results.ok;
 
 /**
  * Created by Adam Piech on 2016-10-12.

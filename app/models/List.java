@@ -1,5 +1,7 @@
 package models;
 
+import com.avaje.ebean.Model;
+
 import javax.persistence.*;
 
 /**
@@ -7,7 +9,7 @@ import javax.persistence.*;
  */
 
 @Entity
-public class List {
+public class List extends Model {
 
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
@@ -18,5 +20,7 @@ public class List {
 
     @OneToMany(cascade = CascadeType.ALL)
     private java.util.List<Card> cards;
+
+    public static final Model.Finder<Long, List> find = new Model.Finder<Long, List>(Long.class, List.class);
 
 }

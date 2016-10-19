@@ -1,5 +1,7 @@
 package models;
 
+import com.avaje.ebean.Model;
+
 import javax.persistence.*;
 
 /**
@@ -7,7 +9,7 @@ import javax.persistence.*;
  */
 
 @Entity
-public class Board {
+public class Board extends Model {
 
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
@@ -22,4 +24,5 @@ public class Board {
     @ManyToMany(cascade = CascadeType.ALL)
     private java.util.List<User> users;
 
+    public static final Finder<Long, Board> find = new Finder<Long, Board>(Long.class, Board.class);
 }

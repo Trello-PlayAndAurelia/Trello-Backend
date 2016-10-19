@@ -1,5 +1,7 @@
 package models;
 
+import com.avaje.ebean.Model;
+
 import javax.persistence.*;
 
 /**
@@ -7,7 +9,7 @@ import javax.persistence.*;
  */
 
 @Entity
-public class Card {
+public class Card extends Model {
 
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
@@ -19,4 +21,5 @@ public class Card {
     @Column(length = 1000, nullable = true)
     private String description;
 
+    public static final Finder<Long, Card> find = new Finder<Long, Card>(Long.class, Card.class);
 }
