@@ -1,6 +1,5 @@
 package model;
 
-
 import javax.persistence.*;
 import javax.validation.constraints.*;
 
@@ -9,38 +8,38 @@ import javax.validation.constraints.*;
  */
 
 @Entity
-public class User {
+public class Board {
 
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private long id;
     @NotNull
-    private String userName;
+    private java.util.List<List> lists;
     @NotNull
-    private String password;
+    private java.util.List<User> users;
     @NotNull
-    private String login;
+    private String tableName;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        User user = (User) o;
+        Board board = (Board) o;
 
-        if (id != user.id) return false;
-        if (!userName.equals(user.userName)) return false;
-        if (!password.equals(user.password)) return false;
-        return login.equals(user.login);
+        if (id != board.id) return false;
+        if (!lists.equals(board.lists)) return false;
+        if (!users.equals(board.users)) return false;
+        return tableName.equals(board.tableName);
 
     }
 
     @Override
     public int hashCode() {
         int result = (int) (id ^ (id >>> 32));
-        result = 31 * result + userName.hashCode();
-        result = 31 * result + password.hashCode();
-        result = 31 * result + login.hashCode();
+        result = 31 * result + lists.hashCode();
+        result = 31 * result + users.hashCode();
+        result = 31 * result + tableName.hashCode();
         return result;
     }
 

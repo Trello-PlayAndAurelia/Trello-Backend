@@ -1,6 +1,7 @@
 package model;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 
 /**
  * Created by Adam Piech on 2016-10-12.
@@ -12,36 +13,30 @@ public class List {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private long id;
+    @NotNull
     private String listName;
-    private java.util.List<Card> cardss;
+    @NotNull
+    private java.util.List<Card> cards;
 
-//    public List(long id, String listName, java.util.List<Card> cardss) {
-//        this.id = id;
-//        this.listName = listName;
-//        this.cardss = cardss;
-//    }
-//
-//    public long getId() {
-//        return id;
-//    }
-//
-//    public void setId(long id) {
-//        this.id = id;
-//    }
-//
-//    public String getListName() {
-//        return listName;
-//    }
-//
-//    public void setListName(String listName) {
-//        this.listName = listName;
-//    }
-//
-//    public java.util.List<Card> getCardss() {
-//        return cardss;
-//    }
-//
-//    public void setCardss(java.util.List<Card> cardss) {
-//        this.cardss = cardss;
-//    }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        List list = (List) o;
+
+        if (id != list.id) return false;
+        if (!listName.equals(list.listName)) return false;
+        return cards.equals(list.cards);
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = (int) (id ^ (id >>> 32));
+        result = 31 * result + listName.hashCode();
+        result = 31 * result + cards.hashCode();
+        return result;
+    }
+
 }

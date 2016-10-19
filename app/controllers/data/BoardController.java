@@ -5,7 +5,7 @@ import play.mvc.Result;
 /**
  * Created by Adam Piech on 2016-10-12.
  */
-public class TableController {
+public class BoardController {
 
     public Result get(Integer id) {
         return null;

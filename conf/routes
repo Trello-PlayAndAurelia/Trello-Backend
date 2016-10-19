@@ -19,7 +19,7 @@ PUT     /users                  controllers.data.UserController.update()
 DELETE  /users/$id<[0-9]+>      controllers.data.UserController.delete(id: Integer)
 
 #Tables
-GET     /tables/$id<[0-9]+>      controllers.data.TableController.get(id: Integer)
-POST    /tables                  controllers.data.TableController.create()
-PUT     /tables                  controllers.data.TableController.update()
-DELETE  /tables/$id<[0-9]+>      controllers.data.TableController.delete(id: Integer)
+GET     /boards/$id<[0-9]+>      controllers.data.BoardController.get(id: Integer)
+POST    /boards                  controllers.data.BoardController.create()
+PUT     /boards                  controllers.data.BoardController.update()
+DELETE  /boards/$id<[0-9]+>      controllers.data.BoardController.delete(id: Integer)
