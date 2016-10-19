@@ -13,12 +13,13 @@ GET     /assets/*file               controllers.Assets.versioned(path="/public",
 # Routes API Rest
 
 #Users
-GET     /users/$id<[0-9]+>      controllers.data.UserController.get(id: Integer)
-POST    /users                  controllers.data.UserController.create()
-PUT     /users                  controllers.data.UserController.update()
-DELETE  /users/$id<[0-9]+>      controllers.data.UserController.delete(id: Integer)
+GET     /users                   controllers.data.UserController.listUsers()
+GET     /users/:id               controllers.data.UserController.getUser(id: Int)
+POST    /users                   controllers.data.UserController.createUser()
+PUT     /users/:id               controllers.data.UserController.updateUser(id: Int)
+DELETE  /users/:id               controllers.data.UserController.deleteUser(id: Int)
 
-#Tables
+#Boards
 GET     /boards/$id<[0-9]+>      controllers.data.BoardController.get(id: Integer)
 POST    /boards                  controllers.data.BoardController.create()
 PUT     /boards                  controllers.data.BoardController.update()
