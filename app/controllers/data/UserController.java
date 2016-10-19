@@ -1,5 +1,9 @@
 package controllers.data;
 
+import javax.persistence.*;
+import play.db.ebean.*;
+import com.avaje.ebean.*;
+
 import com.avaje.ebean.Model;
 import com.fasterxml.jackson.databind.JsonNode;
 import models.User;
@@ -17,7 +21,7 @@ import static play.mvc.Results.ok;
 /**
  * Created by Adam Piech on 2016-10-12.
  */
-public class UserController {
+public class UserController extends Controller {
 
     @BodyParser.Of(BodyParser.Json.class)
     public Result createUser(){
@@ -30,7 +34,7 @@ public class UserController {
         return ok();
     }
 
-    public Result getUser(Integer id) {
+    public Result getUser(long id) {
         User user = User.find.byId(id);
         if (user == null){
             return notFound("User not found!");
@@ -39,7 +43,7 @@ public class UserController {
     }
 
     @BodyParser.Of(BodyParser.Json.class)
-    public Result updateUser(int id){
+    public Result updateUser(long id){
         User user = User.find.byId(id);
         if (user == null){
             return notFound("User not found");
@@ -50,7 +54,7 @@ public class UserController {
         return ok();
     }
 
-    public Result deleteUser(int id){
+    public Result deleteUser(long id){
         User user = User.find.byId(id);
         if (user == null){
             return notFound("User not found");

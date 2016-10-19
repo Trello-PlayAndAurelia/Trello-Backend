@@ -1,6 +1,5 @@
 package controllers;
 
-import com.mysql.jdbc.Driver;
 import play.mvc.*;
 
 import views.html.*;

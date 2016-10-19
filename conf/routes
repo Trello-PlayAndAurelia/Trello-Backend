@@ -14,13 +14,13 @@ GET     /assets/*file               controllers.Assets.versioned(path="/public",
 
 #Users
 GET     /users                   controllers.data.UserController.listUsers()
-GET     /users/:id               controllers.data.UserController.getUser(id: Int)
+GET     /users/:id               controllers.data.UserController.getUser(id: Long)
 POST    /users                   controllers.data.UserController.createUser()
-PUT     /users/:id               controllers.data.UserController.updateUser(id: Int)
-DELETE  /users/:id               controllers.data.UserController.deleteUser(id: Int)
+PUT     /users/:id               controllers.data.UserController.updateUser(id: Long)
+DELETE  /users/:id               controllers.data.UserController.deleteUser(id: Long)
 
 #Boards
-GET     /boards/$id<[0-9]+>      controllers.data.BoardController.get(id: Integer)
+GET     /boards/$id<[0-9]+>      controllers.data.BoardController.get(id: Long)
 POST    /boards                  controllers.data.BoardController.create()
 PUT     /boards                  controllers.data.BoardController.update()
-DELETE  /boards/$id<[0-9]+>      controllers.data.BoardController.delete(id: Integer)
+DELETE  /boards/$id<[0-9]+>      controllers.data.BoardController.delete(id: Long)

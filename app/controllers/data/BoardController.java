@@ -7,7 +7,7 @@ import play.mvc.Result;
  */
 public class BoardController {
 
-    public Result get(Integer id) {
+    public Result get(Long id) {
         return null;
     }
 
@@ -19,7 +19,7 @@ public class BoardController {
         return null;
     }
 
-    public Result delete(Integer id) {
+    public Result delete(Long id) {
         return null;
     }
 
