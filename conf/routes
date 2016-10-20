@@ -13,6 +13,10 @@ GET     /assets/*file               controllers.Assets.versioned(path="/public",
 # Routes API Rest
 
 #Users
+POST    /signup                     controllers.authentication.Authentication.signup()
+POST    /login                      controllers.authentication.Authentication.login()
+GET     /logout                      controllers.authentication.Authentication.logout()
+
 GET     /users                      controllers.data.UserController.listUsers()
 GET     /users/:id                  controllers.data.UserController.getUser(id: Long)
 POST    /users                      controllers.data.UserController.createUser()

@@ -53,4 +53,41 @@ public class User extends Model {
             throw new RuntimeException(e);
         }
     }
+
+    public User(String name, String email, String password) {
+        this.name = name;
+        this.email = email.toLowerCase();
+        this.password = getSha512(password);
+    }
+
+    public static User findByEmail(String email) {
+        return find
+                .where()
+                .eq("email", email.toLowerCase())
+                .findUnique();
+    }
+
+    public static User findByName(String name) {
+        return find
+                .where()
+                .eq("name", name)
+                .findUnique();
+    }
+
+    public static User findByEmailAndPassword(String email, String password) {
+        return find
+                .where()
+                .eq("email", email.toLowerCase())
+                .eq("password", getSha512(password))
+                .findUnique();
+    }
+
+    public static User findByNameAndPassword(String name, String password) {
+        return find
+                .where()
+                .eq("name", name)
+                .eq("password", getSha512(password))
+                .findUnique();
+    }
+
 }
