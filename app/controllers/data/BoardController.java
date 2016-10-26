@@ -1,10 +1,13 @@
 package controllers.data;
 
+import com.avaje.ebean.Model;
 import com.fasterxml.jackson.databind.JsonNode;
 import models.Board;
 import play.libs.Json;
 import play.mvc.BodyParser;
 import play.mvc.Result;
+
+import java.util.List;
 
 import static play.libs.Json.toJson;
 import static play.mvc.Controller.request;
@@ -57,4 +60,8 @@ public class BoardController {
         return ok();
     }
 
+    public Result listBoards(){
+        List<Board> board = new Model.Finder(Board.class).all();
+        return ok(toJson(board));
+    }
 }

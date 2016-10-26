@@ -3,6 +3,7 @@ package models;
 import com.avaje.ebean.Model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 
 /**
  * Created by Adam Piech on 2016-10-12.
@@ -13,16 +14,15 @@ public class Board extends Model {
 
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
-    private long id;
+    public long id;
 
     @Column(length = 128, nullable = false)
-    private String name;
+    public String name;
 
     @OneToMany(cascade = CascadeType.ALL)
-    private java.util.List<List> lists;
+    public java.util.List<List> lists = new ArrayList<>();
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    private java.util.List<User> users;
+//    public java.util.List<Long> userIds = new ArrayList<>();
 
     public static final Finder<Long, Board> find = new Finder<Long, Board>(Long.class, Board.class);
 }

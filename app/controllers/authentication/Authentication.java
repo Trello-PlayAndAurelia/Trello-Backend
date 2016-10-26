@@ -28,7 +28,7 @@ public class Authentication extends Controller {
             return badRequest(buildJsonResponse(TYPE_ERROR, USER_EXISTS));
         } else {
             createNewUser(newUser);
-            return ok(buildJsonResponse(TYPE_ERROR, USER_CREATED_SUCCESSFULLY));
+            return ok(buildJsonResponse(TYPE_SUCCESS, USER_CREATED_SUCCESSFULLY));
         }
     }
 

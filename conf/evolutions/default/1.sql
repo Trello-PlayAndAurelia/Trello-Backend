@@ -9,12 +9,6 @@ create table board (
   constraint pk_board primary key (id)
 );
 
-create table board_user (
-  board_id                      bigint not null,
-  user_id                       bigint not null,
-  constraint pk_board_user primary key (board_id,user_id)
-);
-
 create table card (
   id                            bigint auto_increment not null,
   list_id                       bigint not null,
@@ -46,12 +40,6 @@ create table user_board (
   constraint pk_user_board primary key (user_id,board_id)
 );
 
-alter table board_user add constraint fk_board_user_board foreign key (board_id) references board (id) on delete restrict on update restrict;
-create index ix_board_user_board on board_user (board_id);
-
-alter table board_user add constraint fk_board_user_user foreign key (user_id) references user (id) on delete restrict on update restrict;
-create index ix_board_user_user on board_user (user_id);
-
 alter table card add constraint fk_card_list_id foreign key (list_id) references list (id) on delete restrict on update restrict;
 create index ix_card_list_id on card (list_id);
 
@@ -67,12 +55,6 @@ create index ix_user_board_board on user_board (board_id);
 
 # --- !Downs
 
-alter table board_user drop foreign key fk_board_user_board;
-drop index ix_board_user_board on board_user;
-
-alter table board_user drop foreign key fk_board_user_user;
-drop index ix_board_user_user on board_user;
-
 alter table card drop foreign key fk_card_list_id;
 drop index ix_card_list_id on card;
 
@@ -86,8 +68,6 @@ alter table user_board drop foreign key fk_user_board_board;
 drop index ix_user_board_board on user_board;
 
 drop table if exists board;
-
-drop table if exists board_user;
 
 drop table if exists card;
 

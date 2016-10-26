@@ -13,13 +13,13 @@ public class Card extends Model {
 
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
-    private long id;
+    public long id;
 
     @Column(length = 128, nullable = false)
-    private String name;
+    public String name;
 
     @Column(length = 1000, nullable = true)
-    private String description;
+    public String description;
 
     public static final Finder<Long, Card> find = new Finder<Long, Card>(Long.class, Card.class);
 }

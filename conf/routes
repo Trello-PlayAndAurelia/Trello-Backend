@@ -25,6 +25,7 @@ PUT     /users/:id                  controllers.data.UserController.updateUser(i
 DELETE  /users/:id                  controllers.data.UserController.deleteUser(id: Long)
 
 #Boards
+GET     /boards                     controllers.data.BoardController.listBoards()
 GET     /boards/:id                 controllers.data.BoardController.getBoard(id: Long)
 POST    /boards                     controllers.data.BoardController.createBoard()
 PUT     /boards/:id                 controllers.data.BoardController.updateBoard(id: Long)
