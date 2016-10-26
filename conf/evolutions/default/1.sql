@@ -34,7 +34,7 @@ create table user (
   id                            bigint auto_increment not null,
   name                          varchar(64) not null,
   email                         varchar(255) not null,
-  password                      varbinary(64) not null,
+  password                      varchar(64) not null,
   constraint uq_user_name unique (name),
   constraint uq_user_email unique (email),
   constraint pk_user primary key (id)

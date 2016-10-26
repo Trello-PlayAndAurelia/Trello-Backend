@@ -8,6 +8,9 @@ import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
 
+import static play.libs.Json.toJson;
+import static utils.Permanents.*;
+
 /**
  * Created by Adam Piech on 2016-10-20.
  */
@@ -16,30 +19,17 @@ public class Authentication extends Controller {
 
     public Result signup() {
         Form<SignUp> signUpForm = Form.form(SignUp.class).bindFromRequest();
-
         if (signUpForm.hasErrors()) {
             return badRequest(signUpForm.errorsAsJson());
         }
         SignUp newUser = signUpForm.get();
         User existingUser = User.findByEmail(newUser.email);
-        if(existingUser != null) {
-            return badRequest(buildJsonResponse("error", "User exists"));
+        if (existingUser != null) {
+            return badRequest(buildJsonResponse(TYPE_ERROR, USER_EXISTS));
         } else {
-            User user = new User(newUser.name, newUser.email, newUser.password);
-            user.save();
-            session().clear();
-            session("name", newUser.name);
-
-            return ok(buildJsonResponse("success", "User created successfully"));
+            createNewUser(newUser);
+            return ok(buildJsonResponse(TYPE_ERROR, USER_CREATED_SUCCESSFULLY));
         }
-    }
-
-    private static ObjectNode buildJsonResponse(String type, String message) {
-        ObjectNode wrapper = Json.newObject();
-        ObjectNode msg = Json.newObject();
-        msg.put("message", message);
-        wrapper.put(type, msg);
-        return wrapper;
     }
 
     public Result login() {
@@ -48,61 +38,64 @@ public class Authentication extends Controller {
             return badRequest(loginForm.errorsAsJson());
         }
         Login loggingInUser = loginForm.get();
-        User user = getUserFromForm(loggingInUser);
-        if(user == null) {
-            return badRequest(buildJsonResponse("error", "Incorrect email or password"));
+        User user = User.findByEmailAndPassword(loggingInUser.email, loggingInUser.password);
+        if (user == null) {
+            return badRequest(buildJsonResponse(TYPE_ERROR, INCORRECT_EMAIL_OR_PASSWORD));
         } else {
             session().clear();
-            session("username", loggingInUser.email);
-
-            ObjectNode wrapper = Json.newObject();
-            ObjectNode msg = Json.newObject();
-            msg.put("message", "Logged in successfully");
-            msg.put("user", loggingInUser.email);
-            wrapper.put("success", msg);
-            return ok(wrapper);
+            session(SESSION_DATA_LOGIN, user.name);
+            return ok(buildJsonResponse(user, TYPE_SUCCESS, LOGGED_IN_SUCCESSFULLY));
         }
-    }
-
-    private static User getUserFromForm(Login loggingInUser) {
-        User user = null;
-        if (!loggingInUser.email.equals("")) {
-            user = User.findByEmailAndPassword(loggingInUser.email, loggingInUser.password);
-        }
-        if (!loggingInUser.name.equals("")) {
-            user = User.findByNameAndPassword(loggingInUser.name, loggingInUser.password);
-        }
-        return user;
     }
 
     public Result logout() {
         session().clear();
-        return ok(buildJsonResponse("success", "Logged out successfully"));
+        return ok(buildJsonResponse(TYPE_SUCCESS, LOGGED_OUT_SUCCESSFULLY));
     }
 
-    public static Result isAuthenticated() {
-        if(session().get("user") == null) {
-            return unauthorized();
+    public Result isAuthenticated() {
+        if (session().get(SESSION_DATA_LOGIN) == null) {
+            return unauthorized(buildJsonResponse(TYPE_ERROR, LOGIN_OR_REGISTER));
         } else {
-            ObjectNode wrapper = Json.newObject();
-            ObjectNode msg = Json.newObject();
-            msg.put("message", "User is logged in already");
-            msg.put("user", session().get("username"));
-            wrapper.put("success", msg);
-            return ok(wrapper);
+            return ok(buildJsonResponse(User.findByName(session().get(SESSION_DATA_LOGIN)),
+                    TYPE_SUCCESS, USER_IS_LOGGED_IN_ALREADY));
         }
+    }
+
+    private static void createNewUser(SignUp newUser) {
+        User user = new User(newUser.name, newUser.email, newUser.password);
+        user.save();
+        session().clear();
+        session(SESSION_DATA_LOGIN, user.name);
+    }
+
+    private static ObjectNode buildJsonResponse(User user, String type, String message) {
+        ObjectNode wrapper = Json.newObject();
+        ObjectNode msg = Json.newObject();
+        msg.put(MESSAGE, message);
+        msg.put(TYPE_USER, toJson(user));
+        wrapper.put(type, msg);
+        return wrapper;
+    }
+
+    private static ObjectNode buildJsonResponse(String type, String message) {
+        ObjectNode wrapper = Json.newObject();
+        ObjectNode msg = Json.newObject();
+        msg.put(MESSAGE, message);
+        wrapper.put(type, msg);
+        return wrapper;
     }
 
     public static class UserForm {
         @Constraints.Required
         @Constraints.Email
         public String email;
-
-        @Constraints.Required
-        public String name;
     }
 
     public static class SignUp extends UserForm {
+        @Constraints.Required
+        public String name;
+
         @Constraints.Required
         @Constraints.MinLength(7)
         public String password;
