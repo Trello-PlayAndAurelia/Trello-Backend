@@ -6,6 +6,7 @@
 create table board (
   id                            bigint auto_increment not null,
   name                          varchar(128) not null,
+  user                          integer not null,
   liking                        tinyint(1) default 0,
   constraint pk_board primary key (id)
 );

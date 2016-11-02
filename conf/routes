@@ -18,15 +18,14 @@ POST    /login                      controllers.authentication.Authentication.lo
 GET     /logout                     controllers.authentication.Authentication.logout()
 GET     /authentication             controllers.authentication.Authentication.isAuthenticated()
 
-GET     /users                      controllers.data.UserController.listUsers()
-GET     /users/:id                  controllers.data.UserController.getUser(id: Long)
-POST    /users                      controllers.data.UserController.createUser()
-PUT     /users/:id                  controllers.data.UserController.updateUser(id: Long)
-DELETE  /users/:id                  controllers.data.UserController.deleteUser(id: Long)
+GET     /users/all                  controllers.data.UserController.listUsers()
+GET     /users                      controllers.data.UserController.getUser(id: Long)
+#PUT     /users                      controllers.data.UserController.updateUser(id: Long)
+#DELETE  /users                      controllers.data.UserController.deleteUser(id: Long)
 
 #Boards
-GET     /boards                     controllers.data.BoardController.listBoards()
-GET     /boards/:id                 controllers.data.BoardController.getBoard(id: Long)
+GET     /boards/all                 controllers.data.BoardController.listBoards()
+GET     /boards                     controllers.data.BoardController.getBoard(id: Long)
 POST    /boards                     controllers.data.BoardController.createBoard()
-PUT     /boards/:id                 controllers.data.BoardController.updateBoard(id: Long)
-DELETE  /boards/:id                 controllers.data.BoardController.deleteBoard(id: Long)
+PUT     /boards                     controllers.data.BoardController.updateBoard(id: Long)
+DELETE  /boards                     controllers.data.BoardController.deleteBoard(id: Long)
