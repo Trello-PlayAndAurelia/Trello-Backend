@@ -3,6 +3,7 @@ package controllers.data;
 import com.avaje.ebean.Model;
 import com.fasterxml.jackson.databind.JsonNode;
 import models.Board;
+import models.User;
 import play.libs.Json;
 import play.mvc.BodyParser;
 import play.mvc.Result;
@@ -23,7 +24,7 @@ import static utils.Permanents.*;
 public class BoardController {
 
     @BodyParser.Of(BodyParser.Json.class)
-    public Result createBoard(){
+    public Result createBoard() {
         JsonNode json = request().body().asJson();
         Board board = Json.fromJson(json, Board.class);
         if (board.toString().equals("")){
@@ -42,7 +43,7 @@ public class BoardController {
     }
 
     @BodyParser.Of(BodyParser.Json.class)
-    public Result updateBoard(long id){
+    public Result updateBoard(long id) {
         Board board = Board.find.byId(id);
         if (board == null){
             return notFound(buildJsonResponse(TYPE_ERROR, BOARD_NOT_FOUND));
@@ -53,7 +54,7 @@ public class BoardController {
         return ok(buildJsonResponse(TYPE_SUCCESS, BOARD_UPDATED_SUCCESSFULLY));
     }
 
-    public Result deleteBoard(long id){
+    public Result deleteBoard(long id) {
         Board board = Board.find.byId(id);
         if (board == null){
             return notFound(buildJsonResponse(TYPE_ERROR, BOARD_NOT_FOUND));
@@ -62,9 +63,19 @@ public class BoardController {
         return ok(buildJsonResponse(TYPE_SUCCESS, BOARD_DELETED_SUCCESSFULLY));
     }
 
-    public Result listBoards(){
+    public Result listBoards() {
         List<Board> board = new Model.Finder(Board.class).all();
         return ok(toJson(board));
+    }
+
+    public Result getBoards(long userId) {
+        if (User.find.byId(userId) == null){
+            return notFound(buildJsonResponse(TYPE_ERROR, USER_NOT_FOUND));
+        }
+        return ok(toJson(Board.find
+                .where()
+                .eq("user", userId)
+                .findList()));
     }
 
 }

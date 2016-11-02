@@ -23,6 +23,10 @@ GET     /users                      controllers.data.UserController.getUser(id: 
 #PUT     /users                      controllers.data.UserController.updateUser(id: Long)
 #DELETE  /users                      controllers.data.UserController.deleteUser(id: Long)
 
+GET     /users/allBoards           controllers.data.BoardController.getBoards(userId: Long)
+#GET     /users/archivedBoards      controllers.data.BoardController.getArchivedBoards(userId: Long)
+#GET     /users/normalBoards        controllers.data.BoardController.getNormalBoards(userId: Long)
+
 #Boards
 GET     /boards/all                 controllers.data.BoardController.listBoards()
 GET     /boards                     controllers.data.BoardController.getBoard(id: Long)
