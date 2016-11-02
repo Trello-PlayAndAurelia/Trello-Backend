@@ -30,6 +30,9 @@ public class BoardController {
         if (board.toString().equals("")){
             return badRequest(buildJsonResponse(TYPE_ERROR, BOARD_NOT_FOUND));
         }
+        if (User.find.byId(board.userId) == null){
+            return notFound(buildJsonResponse(TYPE_ERROR, USER_NOT_FOUND));
+        }
         board.save();
         return ok(buildJsonResponse(TYPE_SUCCESS, BOARD_CREATED_SUCCESSFULLY));
     }
@@ -74,7 +77,7 @@ public class BoardController {
         }
         return ok(toJson(Board.find
                 .where()
-                .eq("user", userId)
+                .eq("idUser", userId)
                 .findList()));
     }
 

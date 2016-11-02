@@ -23,7 +23,7 @@ public class Board extends Model {
     public java.util.List<List> lists = new ArrayList<>();
 
     @Column(nullable = false)
-    public int user;
+    public long userId;
 
     public boolean liking;
 

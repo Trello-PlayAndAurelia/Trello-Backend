@@ -6,7 +6,7 @@
 create table board (
   id                            bigint auto_increment not null,
   name                          varchar(128) not null,
-  user                          integer not null,
+  user_id                       bigint not null,
   liking                        tinyint(1) default 0,
   constraint pk_board primary key (id)
 );
@@ -18,6 +18,14 @@ create table card (
   description                   varchar(1000),
   is_archived                   tinyint(1) default 0,
   constraint pk_card primary key (id)
+);
+
+create table comment (
+  id                            bigint auto_increment not null,
+  text                          varchar(1000) not null,
+  card_id                       bigint not null,
+  user_id                       bigint not null,
+  constraint pk_comment primary key (id)
 );
 
 create table list (
@@ -56,6 +64,8 @@ drop index ix_list_board_id on list;
 drop table if exists board;
 
 drop table if exists card;
+
+drop table if exists comment;
 
 drop table if exists list;
 

@@ -25,4 +25,11 @@ public class Permanents {
     public static final String BOARD_UPDATED_SUCCESSFULLY = "Board updated successfully";
     public static final String BOARD_DELETED_SUCCESSFULLY = "Board deleted successfully";
     public static final String BOARD_NOT_FOUND = "Board not found";
+
+    public static final String COMMENT_ADDED_SUCCESSFULLY = "Comment added successfully";
+    public static final String COMMENT_UPDATED_SUCCESSFULLY = "Comment updated successfully";
+    public static final String COMMENT_DELETED_SUCCESSFULLY = "Comment deleted successfully";
+    public static final String COMMENT_NOT_FOUND = "Comment not found";
+
+    public static final String CARD_NOT_FOUND = "Card not found";
 }

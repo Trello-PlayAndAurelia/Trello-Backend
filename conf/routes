@@ -20,10 +20,10 @@ GET     /authentication             controllers.authentication.Authentication.is
 
 GET     /users/all                  controllers.data.UserController.listUsers()
 GET     /users                      controllers.data.UserController.getUser(id: Long)
-#PUT     /users                      controllers.data.UserController.updateUser(id: Long)
-#DELETE  /users                      controllers.data.UserController.deleteUser(id: Long)
+#PUT     /users                     controllers.data.UserController.updateUser(id: Long)
+#DELETE  /users                     controllers.data.UserController.deleteUser(id: Long)
 
-GET     /users/allBoards           controllers.data.BoardController.getBoards(userId: Long)
+GET     /users/allBoards            controllers.data.BoardController.getBoards(userId: Long)
 #GET     /users/archivedBoards      controllers.data.BoardController.getArchivedBoards(userId: Long)
 #GET     /users/normalBoards        controllers.data.BoardController.getNormalBoards(userId: Long)
 
@@ -33,3 +33,9 @@ GET     /boards                     controllers.data.BoardController.getBoard(id
 POST    /boards                     controllers.data.BoardController.createBoard()
 PUT     /boards                     controllers.data.BoardController.updateBoard(id: Long)
 DELETE  /boards                     controllers.data.BoardController.deleteBoard(id: Long)
+
+#Comments
+GET     /comments                   controllers.data.CommentController.getComments(cardId: Long)
+POST    /comments                   controllers.data.CommentController.addComment()
+PUT     /comments                   controllers.data.CommentController.updateComment(id: Long)
+DELETE  /comments                   controllers.data.CommentController.deleteComment(id: Long)
