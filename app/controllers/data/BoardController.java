@@ -14,6 +14,8 @@ import static play.mvc.Controller.request;
 import static play.mvc.Results.badRequest;
 import static play.mvc.Results.notFound;
 import static play.mvc.Results.ok;
+import static utils.JsonResponse.*;
+import static utils.Permanents.*;
 
 /**
  * Created by Adam Piech on 2016-10-12.
@@ -25,16 +27,16 @@ public class BoardController {
         JsonNode json = request().body().asJson();
         Board board = Json.fromJson(json, Board.class);
         if (board.toString().equals("")){
-            return badRequest("Missing parameter");
+            return badRequest(buildJsonResponse(TYPE_ERROR, BOARD_NOT_FOUND));
         }
         board.save();
-        return ok();
+        return ok(buildJsonResponse(TYPE_SUCCESS, BOARD_CREATED_SUCCESSFULLY));
     }
 
     public Result getBoard(long id) {
         Board board = Board.find.byId(id);
         if (board == null){
-            return notFound("Board not found!");
+            return notFound(buildJsonResponse(TYPE_ERROR, BOARD_NOT_FOUND));
         }
         return ok(toJson(board));
     }
@@ -43,25 +45,26 @@ public class BoardController {
     public Result updateBoard(long id){
         Board board = Board.find.byId(id);
         if (board == null){
-            return notFound("Board not found");
+            return notFound(buildJsonResponse(TYPE_ERROR, BOARD_NOT_FOUND));
         }
         JsonNode json = request().body().asJson();
         board = Json.fromJson(json, Board.class);
         board.update();
-        return ok();
+        return ok(buildJsonResponse(TYPE_SUCCESS, BOARD_UPDATED_SUCCESSFULLY));
     }
 
     public Result deleteBoard(long id){
         Board board = Board.find.byId(id);
         if (board == null){
-            return notFound("Board not found");
+            return notFound(buildJsonResponse(TYPE_ERROR, BOARD_NOT_FOUND));
         }
         board.delete();
-        return ok();
+        return ok(buildJsonResponse(TYPE_SUCCESS, BOARD_DELETED_SUCCESSFULLY));
     }
 
     public Result listBoards(){
         List<Board> board = new Model.Finder(Board.class).all();
         return ok(toJson(board));
     }
+
 }

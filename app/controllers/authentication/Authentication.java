@@ -1,14 +1,12 @@
 package controllers.authentication;
 
-import com.fasterxml.jackson.databind.node.ObjectNode;
 import models.User;
 import play.data.Form;
 import play.data.validation.Constraints;
-import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
 
-import static play.libs.Json.toJson;
+import static utils.JsonResponse.*;
 import static utils.Permanents.*;
 
 /**
@@ -68,23 +66,6 @@ public class Authentication extends Controller {
         user.save();
         session().clear();
         session(SESSION_DATA_LOGIN, user.name);
-    }
-
-    private static ObjectNode buildJsonResponse(User user, String type, String message) {
-        ObjectNode wrapper = Json.newObject();
-        ObjectNode msg = Json.newObject();
-        msg.put(MESSAGE, message);
-        msg.put(TYPE_USER, toJson(user));
-        wrapper.put(type, msg);
-        return wrapper;
-    }
-
-    private static ObjectNode buildJsonResponse(String type, String message) {
-        ObjectNode wrapper = Json.newObject();
-        ObjectNode msg = Json.newObject();
-        msg.put(MESSAGE, message);
-        wrapper.put(type, msg);
-        return wrapper;
     }
 
     public static class UserForm {

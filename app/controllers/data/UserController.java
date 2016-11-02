@@ -2,14 +2,14 @@ package controllers.data;
 
 
 import com.avaje.ebean.Model;
-import com.fasterxml.jackson.databind.JsonNode;
 import models.User;
-import play.libs.Json;
 import play.mvc.*;
 
 import java.util.List;
 
 import static play.libs.Json.toJson;
+import static utils.JsonResponse.*;
+import static utils.Permanents.*;
 
 /**
  * Created by Adam Piech on 2016-10-12.
@@ -19,7 +19,7 @@ public class UserController extends Controller {
     public Result getUser(long id) {
         User user = User.find.byId(id);
         if (user == null){
-            return notFound("User not found!");
+            return notFound(buildJsonResponse(TYPE_ERROR, USER_NOT_FOUND));
         }
         return ok(toJson(user));
     }
