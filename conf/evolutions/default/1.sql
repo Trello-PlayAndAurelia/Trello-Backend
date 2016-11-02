@@ -36,6 +36,13 @@ create table list (
   constraint pk_list primary key (id)
 );
 
+create table log (
+  id                            bigint auto_increment not null,
+  log                           varchar(350) not null,
+  board_id                      bigint not null,
+  constraint pk_log primary key (id)
+);
+
 create table user (
   id                            bigint auto_increment not null,
   name                          varchar(64) not null,
@@ -68,6 +75,8 @@ drop table if exists card;
 drop table if exists comment;
 
 drop table if exists list;
+
+drop table if exists log;
 
 drop table if exists user;
 
