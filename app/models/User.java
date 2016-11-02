@@ -26,12 +26,12 @@ public class User extends Model {
     public String email;
 
     @Column(length = 64, nullable = false)
-    private String password;
-//    private byte[] password;
+//    private String password;
+    private byte[] password;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JsonIgnore
-    private java.util.List<Board> boards;
+//    @ManyToMany(cascade = CascadeType.ALL)
+//    @JsonIgnore
+//    private java.util.List<Board> boards;
 
     public static final Finder<Long, User> find = new Finder<Long, User>(Long.class, User.class);
 
@@ -39,13 +39,13 @@ public class User extends Model {
         this.email = email.toLowerCase();
     }
 
-//    public void setPassword(String password) {
-//        this.password = getSha512(password);
-//    }
-
     public void setPassword(String password) {
-        this.password = password;
+        this.password = getSha512(password);
     }
+
+//    public void setPassword(String password) {
+//        this.password = password;
+//    }
 
     public static byte[] getSha512(String value) {
         try {
@@ -62,8 +62,8 @@ public class User extends Model {
     public User(String name, String email, String password) {
         this.name = name;
         this.email = email.toLowerCase();
-//        this.password = getSha512(password);
-        this.password = password;
+        this.password = getSha512(password);
+//        this.password = password;
     }
 
     public static User findByEmail(String email) {
@@ -84,8 +84,8 @@ public class User extends Model {
         return find
                 .where()
                 .eq("email", email.toLowerCase())
-//                .eq("password", getSha512(password))
-                .eq("password", password)
+                .eq("password", getSha512(password))
+//                .eq("password", password)
                 .findUnique();
     }
 
@@ -93,8 +93,8 @@ public class User extends Model {
         return find
                 .where()
                 .eq("name", name)
-//                .eq("password", getSha512(password))
-                .eq("password", password)
+                .eq("password", getSha512(password))
+//                .eq("password", password)
                 .findUnique();
     }
 

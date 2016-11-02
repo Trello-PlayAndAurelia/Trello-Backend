@@ -22,6 +22,8 @@ public class List extends Model {
     @OneToMany(cascade = CascadeType.ALL)
     public java.util.List<Card> cards = new ArrayList<>();
 
+    public boolean isArchived;
+
     public static final Model.Finder<Long, List> find = new Model.Finder<Long, List>(Long.class, List.class);
 
 }

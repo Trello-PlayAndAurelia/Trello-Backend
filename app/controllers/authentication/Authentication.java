@@ -33,7 +33,8 @@ public class Authentication extends Controller {
     }
 
     public Result login() {
-        Form<Login> loginForm = Form.form(Login.class).bindFromRequest();
+        Form<Login> loginForm = Form.form(Login.class).bind(request().body().asJson());
+//        Form<Login> loginForm = Form.form(Login.class).bindFromRequest();
         if (loginForm.hasErrors()) {
             return badRequest(loginForm.errorsAsJson());
         }

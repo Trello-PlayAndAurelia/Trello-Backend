@@ -22,7 +22,11 @@ public class Board extends Model {
     @OneToMany(cascade = CascadeType.ALL)
     public java.util.List<List> lists = new ArrayList<>();
 
-//    public java.util.List<Long> userIds = new ArrayList<>();
+    @Column(nullable = false)
+    public int user;
+
+    public boolean liking;
 
     public static final Finder<Long, Board> find = new Finder<Long, Board>(Long.class, Board.class);
+
 }

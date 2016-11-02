@@ -21,5 +21,7 @@ public class Card extends Model {
     @Column(length = 1000, nullable = true)
     public String description;
 
+    public boolean isArchived;
+
     public static final Finder<Long, Card> find = new Finder<Long, Card>(Long.class, Card.class);
 }
