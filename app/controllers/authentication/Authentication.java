@@ -5,6 +5,7 @@ import play.data.Form;
 import play.data.validation.Constraints;
 import play.mvc.Controller;
 import play.mvc.Result;
+import play.Logger;
 
 import static utils.JsonResponse.*;
 import static utils.Permanents.*;
@@ -15,40 +16,48 @@ import static utils.Permanents.*;
 
 public class Authentication extends Controller {
 
+    private static final Logger.ALogger logger = Logger.of(Authentication.class);
+
     public Result signup() {
         Form<SignUp> signUpForm = Form.form(SignUp.class).bindFromRequest();
         if (signUpForm.hasErrors()) {
+            logger.error(signUpForm.errorsAsJson().asText());
             return badRequest(signUpForm.errorsAsJson());
         }
         SignUp newUser = signUpForm.get();
         User existingUser = User.findByEmail(newUser.email);
         if (existingUser != null) {
+            logger.error(USER_EXISTS);
             return badRequest(buildJsonResponse(TYPE_ERROR, USER_EXISTS));
         } else {
             createNewUser(newUser);
+            logger.info(USER_CREATED_SUCCESSFULLY + " " + newUser.name);
             return ok(buildJsonResponse(TYPE_SUCCESS, USER_CREATED_SUCCESSFULLY));
         }
     }
 
     public Result login() {
         Form<Login> loginForm = Form.form(Login.class).bind(request().body().asJson());
-//        Form<Login> loginForm = Form.form(Login.class).bindFromRequest();
         if (loginForm.hasErrors()) {
+            logger.error(loginForm.errorsAsJson().asText());
             return badRequest(loginForm.errorsAsJson());
         }
         Login loggingInUser = loginForm.get();
         User user = User.findByEmailAndPassword(loggingInUser.email, loggingInUser.password);
         if (user == null) {
+            logger.error(INCORRECT_EMAIL_OR_PASSWORD);
             return badRequest(buildJsonResponse(TYPE_ERROR, INCORRECT_EMAIL_OR_PASSWORD));
         } else {
             session().clear();
             session(SESSION_DATA_LOGIN, user.name);
+            logger.info(LOGGED_IN_SUCCESSFULLY + " " + user.name);
             return ok(buildJsonResponse(user, TYPE_SUCCESS, LOGGED_IN_SUCCESSFULLY));
         }
     }
 
     public Result logout() {
         session().clear();
+        logger.info(LOGGED_OUT_SUCCESSFULLY);
         return ok(buildJsonResponse(TYPE_SUCCESS, LOGGED_OUT_SUCCESSFULLY));
     }
 
