@@ -16,7 +16,7 @@ import static utils.Permanents.*;
 
 public class Authentication extends Controller {
 
-    private static final Logger.ALogger logger = Logger.of(Authentication.class);
+    private static final Logger.ALogger logger = play.Logger.of("application");
 
     public Result signup() {
         Form<SignUp> signUpForm = Form.form(SignUp.class).bindFromRequest();
