@@ -1,16 +1,13 @@
-New log file opened at Wed Nov 16 17:18:35 CET 2016 by 121240@Adam-Komputer
-Taking next connection to: 53739
-New client attempting to connect on port: 53740-53739
-  Address = /192.168.56.1:53739
-This client on port 53740 has uuid 1d60ca05-c02e-458a-b7b5-154e0de48f5f configName play-fork-run humanReadableName Play Fork Run protocolVersion 1 featureTags Vector()
-Connected Clients: play-fork-run-1d60ca05-c02e-458a-b7b5-154e0de48f5f
-Taking next connection to: 53739
-Checking to see if clients are empty...
-We have 1 non-daemon clients, continuing serving connections.
-Taking next connection to: 53739
-New client attempting to connect on port: 53748-53739
-  Address = /192.168.56.1:53739
-Handshake exception on socket: 53748
+New log file opened at Wed Nov 16 18:19:48 CET 2016 by 119720@Adam-Komputer
+Taking next connection to: 54461
+New client attempting to connect on port: 54462-54461
+  Address = /192.168.56.1:54461
+This client on port 54462 has uuid 2e0a0fa7-3ce0-40d7-b223-0d05c5a45ed8 configName play-fork-run humanReadableName Play Fork Run protocolVersion 1 featureTags Vector()
+Connected Clients: play-fork-run-2e0a0fa7-3ce0-40d7-b223-0d05c5a45ed8
+Taking next connection to: 54461
+New client attempting to connect on port: 54472-54461
+  Address = /192.168.56.1:54461
+Handshake exception on socket: 54472
 sbt.impl.ipc.HandshakeException: Unable to perform handshake
 	at sbt.impl.ipc.Peer.handshake(IPC.scala:46)
 	at sbt.impl.ipc.MultiClientServer.<init>(IPC.scala:150)
@@ -26,9 +23,9 @@ Caused by: java.net.SocketException: Software caused connection abort: recv fail
 	at sbt.impl.ipc.Peer.receive(IPC.scala:95)
 	at sbt.impl.ipc.Peer.handshake(IPC.scala:49)
 	... 2 more
-Taking next connection to: 53739
-New client attempting to connect on port: 53749-53739
-  Address = /192.168.56.1:53739
-This client on port 53749 has uuid 4928b239-0c77-45e9-a82b-f3457094b4d7 configName play-fork-run humanReadableName Play Fork Run protocolVersion 1 featureTags Vector()
-Connected Clients: play-fork-run-4928b239-0c77-45e9-a82b-f3457094b4d7
-Taking next connection to: 53739
+Taking next connection to: 54461
+New client attempting to connect on port: 54473-54461
+  Address = /192.168.56.1:54461
+This client on port 54473 has uuid 7cc9f69d-4e59-4738-8514-8b27adba50a8 configName play-fork-run humanReadableName Play Fork Run protocolVersion 1 featureTags Vector()
+Connected Clients: play-fork-run-7cc9f69d-4e59-4738-8514-8b27adba50a8
+Taking next connection to: 54461

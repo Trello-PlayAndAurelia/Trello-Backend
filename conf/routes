@@ -42,11 +42,11 @@ PUT     /lists                      controllers.data.ListController.updateList(i
 DELETE  /lists                      controllers.data.ListController.deleteList(id: Long)
 
 #Cards
-#GET     /cards/all                  controllers.data.CardsController.listCards(listId: Long)
-#GET     /cards                      controllers.data.CardsController.getCards(id: Long)
-#POST    /cards                      controllers.data.CardsController.createCards()
-#PUT     /cards                      controllers.data.CardsController.updateCards(id: Long)
-#DELETE  /cards                      controllers.data.CardsController.deleteCards(id: Long)
+GET     /cards/all                  controllers.data.CardsController.getCards(listId: Long)
+GET     /cards                      controllers.data.CardsController.getCard(id: Long)
+POST    /cards                      controllers.data.CardsController.createCard(listId: Long)
+PUT     /cards                      controllers.data.CardsController.updateCard(id: Long)
+DELETE  /cards                      controllers.data.CardsController.deleteCard(id: Long)
 
 #Comments
 GET     /comments                   controllers.data.CommentController.getComments(cardId: Long)
