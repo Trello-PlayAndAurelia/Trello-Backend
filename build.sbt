@@ -13,5 +13,6 @@ libraryDependencies ++= Seq (
   "mysql" % "mysql-connector-java" % "5.1.18"
 )
 
+libraryDependencies += filters
 
 fork in run := true
