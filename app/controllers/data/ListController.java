@@ -1,6 +1,8 @@
 package controllers.data;
 
+import com.avaje.ebean.Model;
 import com.fasterxml.jackson.databind.JsonNode;
+import models.Board;
 import models.List;
 import play.libs.Json;
 import play.mvc.BodyParser;
@@ -19,19 +21,21 @@ import static utils.Permanents.*;
  */
 public class ListController {
 
-//    @BodyParser.Of(BodyParser.Json.class)
-//    public Result createList() {
-//        JsonNode json = request().body().asJson();
-//        Board board = Json.fromJson(json, Board.class);
-//        if (board.toString().equals("")){
-//            return badRequest(buildJsonResponse(TYPE_ERROR, BOARD_NOT_FOUND));
-//        }
-//        if (User.find.byId(board.userId) == null){
-//            return notFound(buildJsonResponse(TYPE_ERROR, USER_NOT_FOUND));
-//        }
-//        board.save();
-//        return ok(buildJsonResponse(TYPE_SUCCESS, BOARD_CREATED_SUCCESSFULLY));
-//    }
+    @BodyParser.Of(BodyParser.Json.class)
+    public Result createList(long boardId) {
+        Board board = Board.find.byId(boardId);
+        if (board == null){
+            return notFound(buildJsonResponse(TYPE_ERROR, BOARD_NOT_FOUND));
+        }
+        JsonNode json = request().body().asJson();
+        List list = Json.fromJson(json, List.class);
+        if (list.toString().equals("")){
+            return badRequest(buildJsonResponse(TYPE_ERROR, LIST_NOT_FOUND));
+        }
+        board.lists.add(list);
+        board.update();
+        return ok(buildJsonResponse(TYPE_SUCCESS, LIST_CREATED_SUCCESSFULLY));
+    }
 
     public Result getList(long id) {
         List list = List.find.byId(id);
@@ -62,18 +66,12 @@ public class ListController {
         return ok(buildJsonResponse(TYPE_SUCCESS, LIST_DELETED_SUCCESSFULLY));
     }
 
-//    public Result listLists(long boardId) {
-//        List<Board> board = new Model.Finder(Board.class).all();
-//        return ok(toJson(board));
-//    }
+    public Result getLists(long boardId) {
+        Board board = Board.find.byId(boardId);
+        if (board == null){
+            return notFound(buildJsonResponse(TYPE_ERROR, BOARD_NOT_FOUND));
+        }
+        return ok(toJson(board.lists));
+    }
 
-//    public Result getLists(long userId) {
-//        if (User.find.byId(userId) == null){
-//            return notFound(buildJsonResponse(TYPE_ERROR, USER_NOT_FOUND));
-//        }
-//        return ok(toJson(Board.find
-//                .where()
-//                .eq("idUser", userId)
-//                .findList()));
-//    }
 }

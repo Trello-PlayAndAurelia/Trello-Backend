@@ -35,9 +35,9 @@ PUT     /boards                     controllers.data.BoardController.updateBoard
 DELETE  /boards                     controllers.data.BoardController.deleteBoard(id: Long)
 
 #Lists
-#GET     /lists/all                  controllers.data.ListController.listLists(boardId: Long)
+GET     /lists/all                  controllers.data.ListController.getLists(boardId: Long)
 GET     /lists                      controllers.data.ListController.getList(id: Long)
-#POST    /lists                      controllers.data.ListController.createList(boardId: Long)
+POST    /lists                      controllers.data.ListController.createList(boardId: Long)
 PUT     /lists                      controllers.data.ListController.updateList(id: Long)
 DELETE  /lists                      controllers.data.ListController.deleteList(id: Long)
 
