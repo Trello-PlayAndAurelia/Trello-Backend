@@ -31,7 +31,7 @@ public class BoardController {
             return badRequest(buildJsonResponse(TYPE_ERROR, BOARD_NOT_FOUND));
         }
         if (User.find.byId(board.userId) == null){
-            return notFound(buildJsonResponse(TYPE_ERROR, USER_NOT_FOUND));
+//            return notFound(buildJsonResponse(TYPE_ERROR, USER_NOT_FOUND));
         }
         board.save();
         return ok(buildJsonResponse(board, TYPE_SUCCESS, BOARD_CREATED_SUCCESSFULLY));

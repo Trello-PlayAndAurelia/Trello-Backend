@@ -5,3 +5,9 @@ New client attempting to connect on port: 55159-55158
 This client on port 55159 has uuid c7c3177c-ad69-412d-a50e-6798e0167b8a configName play-fork-run humanReadableName Play Fork Run protocolVersion 1 featureTags Vector()
 Connected Clients: play-fork-run-c7c3177c-ad69-412d-a50e-6798e0167b8a
 Taking next connection to: 55158
+Checking to see if clients are empty...
+No non-daemon clients connected after 3 min. Shutting down.
+Server socket thread exiting.
+0 clients open, will close them...
+All client sockets have been closed.
+Closing the 126172@Adam-Komputer logs at Wed Nov 16 20:25:27 CET 2016, goodbye.
