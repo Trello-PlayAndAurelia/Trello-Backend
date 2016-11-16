@@ -1,6 +1,9 @@
 package utils;
 
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import models.Board;
+import models.Card;
+import models.List;
 import models.User;
 import play.libs.Json;
 
@@ -20,6 +23,34 @@ public class JsonResponse {
         wrapper.put(type, msg);
         return wrapper;
     }
+
+    public static ObjectNode buildJsonResponse(Board board, String type, String message) {
+        ObjectNode wrapper = Json.newObject();
+        ObjectNode msg = Json.newObject();
+        msg.put(MESSAGE, message);
+        msg.put(TYPE_BOARD, toJson(board));
+        wrapper.put(type, msg);
+        return wrapper;
+    }
+
+    public static ObjectNode buildJsonResponse(List list, String type, String message) {
+        ObjectNode wrapper = Json.newObject();
+        ObjectNode msg = Json.newObject();
+        msg.put(MESSAGE, message);
+        msg.put(TYPE_LIST, toJson(list));
+        wrapper.put(type, msg);
+        return wrapper;
+    }
+
+    public static ObjectNode buildJsonResponse(Card card, String type, String message) {
+        ObjectNode wrapper = Json.newObject();
+        ObjectNode msg = Json.newObject();
+        msg.put(MESSAGE, message);
+        msg.put(TYPE_CARD, toJson(card));
+        wrapper.put(type, msg);
+        return wrapper;
+    }
+
 
     public static ObjectNode buildJsonResponse(String type, String message) {
         ObjectNode wrapper = Json.newObject();

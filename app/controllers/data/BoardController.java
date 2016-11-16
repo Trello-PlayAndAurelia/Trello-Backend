@@ -34,7 +34,7 @@ public class BoardController {
             return notFound(buildJsonResponse(TYPE_ERROR, USER_NOT_FOUND));
         }
         board.save();
-        return ok(buildJsonResponse(TYPE_SUCCESS, BOARD_CREATED_SUCCESSFULLY));
+        return ok(buildJsonResponse(board, TYPE_SUCCESS, BOARD_CREATED_SUCCESSFULLY));
     }
 
     public Result getBoard(long id) {

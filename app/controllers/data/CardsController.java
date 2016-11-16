@@ -1,7 +1,6 @@
 package controllers.data;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import models.Board;
 import models.Card;
 import models.List;
 import play.libs.Json;
@@ -35,7 +34,7 @@ public class CardsController {
         }
         list.cards.add(card);
         list.update();
-        return ok(buildJsonResponse(TYPE_SUCCESS, CARD_CREATED_SUCCESSFULLY));
+        return ok(buildJsonResponse(card, TYPE_SUCCESS, CARD_CREATED_SUCCESSFULLY));
     }
 
     public Result getCard(long id) {

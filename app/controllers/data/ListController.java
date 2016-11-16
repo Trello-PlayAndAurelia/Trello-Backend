@@ -33,7 +33,7 @@ public class ListController {
         }
         board.lists.add(list);
         board.update();
-        return ok(buildJsonResponse(TYPE_SUCCESS, LIST_CREATED_SUCCESSFULLY));
+        return ok(buildJsonResponse(list, TYPE_SUCCESS, LIST_CREATED_SUCCESSFULLY));
     }
 
     public Result getList(long id) {

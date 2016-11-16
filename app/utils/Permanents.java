@@ -8,6 +8,9 @@ public class Permanents {
     public static final String TYPE_SUCCESS = "success";
     public static final String TYPE_ERROR = "error";
     public static final String TYPE_USER = "user";
+    public static final String TYPE_BOARD = "board";
+    public static final String TYPE_LIST = "list";
+    public static final String TYPE_CARD = "card";
     public static final String MESSAGE = "message";
 
     public static final String SESSION_DATA_LOGIN = "login";
