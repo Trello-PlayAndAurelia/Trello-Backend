@@ -1,0 +1,10 @@
+New log file opened at Wed Nov 16 16:38:02 CET 2016 by 110960@Adam-Komputer
+Taking next connection to: 53280
+New client attempting to connect on port: 53281-53280
+  Address = /192.168.56.1:53280
+This client on port 53281 has uuid acbf60a0-aa9e-4bed-a17f-d15a446af280 configName play-fork-run humanReadableName Play Fork Run protocolVersion 1 featureTags Vector()
+Connected Clients: play-fork-run-acbf60a0-aa9e-4bed-a17f-d15a446af280
+Taking next connection to: 53280
+Checking to see if clients are empty...
+We have 1 non-daemon clients, continuing serving connections.
+Taking next connection to: 53280

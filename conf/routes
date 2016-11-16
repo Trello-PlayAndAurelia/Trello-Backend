@@ -34,6 +34,20 @@ POST    /boards                     controllers.data.BoardController.createBoard
 PUT     /boards                     controllers.data.BoardController.updateBoard(id: Long)
 DELETE  /boards                     controllers.data.BoardController.deleteBoard(id: Long)
 
+#Lists
+#GET     /lists/all                  controllers.data.ListController.listLists(boardId: Long)
+GET     /lists                      controllers.data.ListController.getList(id: Long)
+#POST    /lists                      controllers.data.ListController.createList(boardId: Long)
+PUT     /lists                      controllers.data.ListController.updateList(id: Long)
+DELETE  /lists                      controllers.data.ListController.deleteList(id: Long)
+
+#Cards
+#GET     /cards/all                  controllers.data.CardsController.listCards(listId: Long)
+#GET     /cards                      controllers.data.CardsController.getCards(id: Long)
+#POST    /cards                      controllers.data.CardsController.createCards()
+#PUT     /cards                      controllers.data.CardsController.updateCards(id: Long)
+#DELETE  /cards                      controllers.data.CardsController.deleteCards(id: Long)
+
 #Comments
 GET     /comments                   controllers.data.CommentController.getComments(cardId: Long)
 POST    /comments                   controllers.data.CommentController.addComment()
